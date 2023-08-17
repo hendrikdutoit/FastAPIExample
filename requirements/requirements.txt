@@ -9,6 +9,7 @@
 # beetools
 # codecov
 # docutils
+fastapi
 # git-it
 # mysql-connector-python
 # Path
