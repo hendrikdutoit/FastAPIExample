@@ -1,0 +1,7 @@
+git-it
+# mypy
+# reorder-python-imports
+pytest
+pytest-cov
+rstcheck
+# uvicorn
