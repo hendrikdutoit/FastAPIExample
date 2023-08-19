@@ -9,7 +9,7 @@
 # beetools
 # codecov
 # docutils
-fastapi
+fastapi[all]
 # git-it
 # mysql-connector-python
 # Path
@@ -17,4 +17,3 @@ fastapi
 # pytest
 # pytest-cov
 # sphinx==6.2.1
-fastapi
