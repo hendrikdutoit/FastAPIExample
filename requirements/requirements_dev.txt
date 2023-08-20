@@ -1,0 +1,8 @@
+git-it
+httpx
+# mypy
+# reorder-python-imports
+pytest
+pytest-cov
+# rstcheck Incompatible with Pydantic 2.0.0
+uvicorn[standard]

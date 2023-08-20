@@ -2,11 +2,12 @@
 
 Project long description or extended summary goes in here (default ini)
 '''
-
 import logging
 from pathlib import Path
+
+from beetools import beearchiver
+from beetools import beeutils
 from termcolor import colored
-from beetools import beearchiver, beeutils
 
 _PROJ_DESC = __doc__.split('\n')[0]
 _PROJ_PATH = Path(__file__)
@@ -49,7 +50,7 @@ class FastAPIExample:
         '''
         self.success = True
         if p_parent_log_name:
-            self.log_name = '{}.{}'.format(p_parent_log_name, FastAPIExample)
+            self.log_name = f'{p_parent_log_name}.{FastAPIExample}'
             self.logger = logging.getLogger(self._log_name)
         self.project_name = p_project_name
         self.dir = p_dir
@@ -76,8 +77,8 @@ class FastAPIExample:
         --------
 
         '''
-        print(colored('Testing {}...'.format(self.project_name), 'yellow'))
-        print(colored('Message: {}'.format(p_msg), 'yellow'))
+        print(colored(f'Testing {self.project_name}...', 'yellow'))
+        print(colored(f'Message: {p_msg}', 'yellow'))
         return True
 
 
@@ -144,7 +145,7 @@ def do_example1(p_cls=True):
     archiver = beearchiver.Archiver(_PROJ_DESC, _PROJ_PATH)
     archiver.print_header(p_cls=p_cls)
     t_dir = beeutils.get_tmp_dir()
-    t_fastapiexample = FastAPIExample("FastAPIExample", t_dir)
+    t_fastapiexample = FastAPIExample('FastAPIExample', t_dir)
     t_fastapiexample.method_1('This is do_example1')
     beeutils.rm_tree(t_dir)
     archiver.print_footer()
@@ -182,7 +183,7 @@ def do_example2(p_cls=True):
     archiver = beearchiver.Archiver(_PROJ_DESC, _PROJ_PATH)
     archiver.print_header(p_cls=p_cls)
     t_dir = beeutils.get_tmp_dir()
-    t_fastapiexample = FastAPIExample("FastAPIExample", t_dir)
+    t_fastapiexample = FastAPIExample('FastAPIExample', t_dir)
     t_fastapiexample.method_1('This is do_example2')
     beeutils.rm_tree(t_dir)
     archiver.print_footer()
