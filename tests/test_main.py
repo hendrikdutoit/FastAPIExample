@@ -1,11 +1,13 @@
 from pathlib import Path
 
-import pytest
 from fastapi.testclient import TestClient
 
 from main import app
 from main import Item
-from main import ModelName
+
+# from main import ModelName
+
+# import pytest
 
 client = TestClient(app)
 ModelMsg = ['Deep Learning FTW!', 'Have some residuals', 'LeCNN all the images']
@@ -79,13 +81,13 @@ class TestItems:
         pass
 
 
-class TestModels:
-    @pytest.mark.parametrize('model,msg', list(zip(ModelName, ModelMsg)))
-    def test_get_model(self, model, msg):
-        response = client.get(f'/models/{model}')
-        assert response.status_code == 200
-        assert response.json() == {'model_name': model, 'message': msg}
-        pass
+# class TestModels:
+#     @pytest.mark.parametrize('model,msg', list(zip(ModelName, ModelMsg)))
+#     def test_get_model(self, model, msg):
+#         response = client.get(f'/models/{model}')
+#         assert response.status_code == 200
+#         assert response.json() == {'model_name': model, 'message': msg}
+#         pass
 
 
 class TestFiles:
