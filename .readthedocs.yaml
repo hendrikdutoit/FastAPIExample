@@ -10,16 +10,15 @@ sphinx:
 #  builder: html
 #  fail_on_warning: true
 
-formats: all
+#formats:
+#  - pdf
+#  - epub
 
 python:
-  version: 3.8
   install:
     - method: pip
       path: .
-      extra_requirements:
-        - all
-    - requirements: docs/requirements_docs.txt
+    - requirements: requirements/requirements_docs.txt
 
-submodules:
-  include: all
+#submodules:
+#  include: all
