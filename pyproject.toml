@@ -1,13 +1,13 @@
 [project]
 name = 'FastAPIExample'
-version = '0.0.2'
+version = '0.0.3'
 authors = [
     { name = 'Hendrik du Toit', email = 'hendrik@brightedge.co.za' },
 ]
 description = 'Exploring FastAPI'
 license = {file = 'LICENSE'}
 classifiers = [
-    'DevStatus = Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 2 - Pre-Alpha',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Topic :: Communications',
