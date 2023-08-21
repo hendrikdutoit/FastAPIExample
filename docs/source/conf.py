@@ -1,6 +1,6 @@
 import os
-import pprint
 import sys
+from pprint import pprint
 
 
 project = 'FastAPIExample'

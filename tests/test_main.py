@@ -1,4 +1,5 @@
 from pathlib import Path
+from pprint import pprint
 
 import pytest
 from fastapi.testclient import TestClient
@@ -83,6 +84,7 @@ class TestModels:
     @pytest.mark.parametrize('model,msg', list(zip(ModelName, ModelMsg)))
     def test_get_model(self, model, msg):
         response = client.get(f'/models/{model}')
+        pprint(response.json())
         assert response.status_code == 200
         assert response.json() == {'model_name': model, 'message': msg}
         pass
