@@ -73,10 +73,16 @@ class TestItems:
         pass
 
     def test_create_item(self):
-        item = Item(name='Item name', price=2.0)
+        item = Item(name='Item name', price=2.0, tax=0.1)
         response = client.post('/items/', json=dict(item))
         assert response.status_code == 200
-        assert response.json() == dict(item)
+        assert response.json() == {
+            'name': 'Item name',
+            'description': None,
+            'price': 2.0,
+            'tax': 0.1,
+            'price_with_tax': 2.1,
+        }
         pass
 
 
