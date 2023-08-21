@@ -13,7 +13,9 @@ fastapi[all]
 # git-it
 # mysql-connector-python
 # Path
+pydantic
 # Pygments
 # pytest
 # pytest-cov
 # sphinx==6.2.1
+sqlalchemy

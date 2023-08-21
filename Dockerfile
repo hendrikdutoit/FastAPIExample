@@ -12,9 +12,12 @@ COPY requirements/requirements.txt requirements_test.txt ./
 RUN apt update && \
     apt upgrade -y && \
     apt-get clean && \
+    apt-get install -y git \
     rm -rf /var/lib/apt/lists/* && \
-    pip install --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir --force-reinstall -r requirements\requirements.txt -r requirements\requirements_dev.txt
+#    pip install --upgrade pip setuptools wheel && \
+#    pip install git+https://github.com/RealTimeEvents/rte-db.git && \
+#    pip install --no-cache-dir --force-reinstall -r requirements\requirements.txt -r requirements\requirements_dev.txt
+
 
 # Copy the current directory contents into the container at /app
 COPY . /app

@@ -22,11 +22,12 @@ requires-python = '>=3.10, <3.12'
 dependencies = [
     # 'argparse',
     # 'beetools',
+    'fastapi',
     # 'git-it',
     # 'mysql-connector-python',
     # 'Pygments',
     'sqlalchemy',
-    'sqlalchemy-utils',
+#    'sqlalchemy-utils',
   ]
 
 [project.optional-dependencies]
