@@ -83,7 +83,7 @@ class TestItems:
 class TestModels:
     @pytest.mark.parametrize('model,msg', list(zip(ModelName, ModelMsg)))
     def test_get_model(self, model, msg):
-        response = client.get(f'/models/{model}')
+        response = client.get(f'/models/{model.name}')
         pprint(response.json())
         assert response.status_code == 200
         assert response.json() == {'model_name': model, 'message': msg}
