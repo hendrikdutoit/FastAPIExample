@@ -14,6 +14,7 @@ classifiers = [
     'Topic :: Software Development',
     'Topic :: Internet :: WWW/HTTP',
     'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11'
 ]
 readme = {file = 'README.rst', content-type = 'text/x-rst'}

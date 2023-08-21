@@ -72,7 +72,7 @@ class TestItems:
         assert response.json() == [{'item_name': 'Bar'}, {'item_name': 'Baz'}]
         pass
 
-    def test_create_item(self):
+    def test_create_item_post(self):
         item = Item(name='Item name', price=2.0, tax=0.1)
         response = client.post('/items/', json=dict(item))
         assert response.status_code == 200
@@ -82,6 +82,20 @@ class TestItems:
             'price': 2.0,
             'tax': 0.1,
             'price_with_tax': 2.1,
+        }
+        pass
+
+    def test_create_item_put(self):
+        item = Item(name='Item name', price=2.0, tax=0.1)
+        response = client.put('/items/5?q=queue', json=dict(item))
+        assert response.status_code == 200
+        assert response.json() == {
+            'item_id': 5,
+            'name': 'Item name',
+            'description': None,
+            'price': 2.0,
+            'tax': 0.1,
+            'q': 'queue',
         }
         pass
 
