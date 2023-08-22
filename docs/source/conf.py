@@ -7,7 +7,7 @@ project = 'FastAPIExample'
 copyright = '2023, Hendrik du Toit'
 author = 'Hendrik du Toit'
 release = '0.0'
-version = '0.0.5'
+version = '0.0.6'
 # add_module_names = False
 sys.path.insert(0, os.path.abspath(r'../../src'))
 sys.path.insert(0, os.path.abspath('..'))
