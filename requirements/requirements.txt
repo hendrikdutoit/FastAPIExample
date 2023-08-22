@@ -11,7 +11,7 @@
 # docutils
 fastapi[all]
 # git-it
-# mysql-connector-python
+mysql-connector-python
 # Path
 pydantic
 # Pygments

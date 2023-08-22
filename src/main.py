@@ -1,3 +1,7 @@
+"""
+MYSQL_DB_NAME=SQLAlchemyExample;MYSQL_HOST=localhost;MYSQL_ROOT_PWD=N0tS0S3curePassw0rd;MYSQL_TCP_PORT_EXAMPLES=50002;SQLALCHEMY_SILENCE_UBER_WARNING=1
+
+"""
 from fastapi import Depends
 from fastapi import FastAPI
 from fastapi import HTTPException
@@ -9,12 +13,13 @@ import schemas
 from dbdef import engine
 from dbdef import SessionLocal
 from models import fake_items_db
-from models import Item
 from models import ModelName
+from schemas import ItemSchema
+
+# from models import Item
 
 models.Base.metadata.create_all(bind=engine)
 
-# MYSQL_DB_NAME=SQLAlchemyExample;MYSQL_HOST=localhost;MYSQL_ROOT_PWD=N0tS0S3curePassw0rd;MYSQL_TCP_PORT_EXAMPLES=50002;SQLALCHEMY_SILENCE_UBER_WARNING=1
 app = FastAPI()
 
 
@@ -44,7 +49,7 @@ async def read_item(skip: int = 0, limit: int = 10):
 
 
 @app.post('/items/')
-async def create_item(item: Item):
+async def create_item(item: ItemSchema):
     item_dict = item.model_dump()
     if item.tax:
         price_with_tax = item.price + item.tax
@@ -53,7 +58,7 @@ async def create_item(item: Item):
 
 
 @app.put('/items/{item_id}')
-async def create_item(item_id: int, item: Item, q: str | None = None):
+async def create_item(item_id: int, item: ItemSchema, q: str | None = None):
     result = {'item_id': item_id, **item.model_dump()}
     if q:
         result.update({'q': q})
