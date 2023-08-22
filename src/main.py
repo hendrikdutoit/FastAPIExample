@@ -1,6 +1,4 @@
 """
-MYSQL_DB_NAME=SQLAlchemyExample;MYSQL_HOST=localhost;MYSQL_ROOT_PWD=N0tS0S3curePassw0rd;MYSQL_TCP_PORT_EXAMPLES=50002;SQLALCHEMY_SILENCE_UBER_WARNING=1
-
 """
 from fastapi import Depends
 from fastapi import FastAPI
