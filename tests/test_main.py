@@ -5,8 +5,12 @@ import pytest
 from fastapi.testclient import TestClient
 
 from main import app
-from main import Item
 from main import ModelName
+from schemas import ItemSchema
+
+# from main import Item
+# from models import Item
+# from models import User
 
 client = TestClient(app)
 ModelMsg = ['Deep Learning FTW!', 'Have some residuals', 'LeCNN all the images']
@@ -72,11 +76,31 @@ class TestItems:
         assert response.json() == [{'item_name': 'Bar'}, {'item_name': 'Baz'}]
         pass
 
-    def test_create_item(self):
-        item = Item(name='Item name', price=2.0)
+    def test_create_item_post(self):
+        item = ItemSchema(name='Item name', price=2.0, tax=0.1)
         response = client.post('/items/', json=dict(item))
         assert response.status_code == 200
-        assert response.json() == dict(item)
+        assert response.json() == {
+            'name': 'Item name',
+            'description': None,
+            'price': 2.0,
+            'tax': 0.1,
+            'price_with_tax': 2.1,
+        }
+        pass
+
+    def test_create_item_put(self):
+        item = ItemSchema(name='Item name', price=2.0, tax=0.1)
+        response = client.put('/items/5?q=queue', json=dict(item))
+        assert response.status_code == 200
+        assert response.json() == {
+            'item_id': 5,
+            'name': 'Item name',
+            'description': None,
+            'price': 2.0,
+            'tax': 0.1,
+            'q': 'queue',
+        }
         pass
 
 
@@ -155,4 +179,14 @@ class TestMultipleAndQuery:
                 }
             ]
         }
+        pass
+
+
+class TestORM:
+    def test_create_user_post(self):
+        response = client.post('/users/', json={'email': 'foo@bar.com', 'password': 'mypassword', 'item': None})
+        pprint(response.json())
+        assert response.status_code == 200
+        assert response.json() == {'email': 'foo@bar.com', 'id': 1, 'is_active': True, 'items': []}
+        pass
         pass

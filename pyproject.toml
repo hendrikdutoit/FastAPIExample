@@ -1,6 +1,6 @@
 [project]
 name = 'FastAPIExample'
-version = '0.0.4'
+version = '0.0.6'
 authors = [
     { name = 'Hendrik du Toit', email = 'hendrik@brightedge.co.za' },
 ]
@@ -14,18 +14,20 @@ classifiers = [
     'Topic :: Software Development',
     'Topic :: Internet :: WWW/HTTP',
     'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11'
 ]
 readme = {file = 'README.rst', content-type = 'text/x-rst'}
-requires-python = '>=3.11, <3.12'
+requires-python = '>=3.10, <3.12'
 dependencies = [
     # 'argparse',
     # 'beetools',
+    'fastapi',
     # 'git-it',
     # 'mysql-connector-python',
     # 'Pygments',
     'sqlalchemy',
-    'sqlalchemy-utils',
+#    'sqlalchemy-utils',
   ]
 
 [project.optional-dependencies]
@@ -59,7 +61,7 @@ quiet-level = 2
 source = ['src']
 
 [tool.pytest.ini_options]
-addopts = ['--import-mode=importlib', '-v', '--ignore-glob=*\\Archive']
+addopts = ['--import-mode=importlib', '-vv', '--ignore-glob=*\\Archive']
 #addopts = ['--import-mode=importlib', "-v", "--cov=./", "--ignore-glob=*\\Archive", "--cov-report=html"]
 pythonpath = ['src', 'tests' ]
 markers = [
