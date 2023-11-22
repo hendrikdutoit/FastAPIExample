@@ -7,7 +7,7 @@ authors = [
 description = 'Exploring FastAPI'
 license = {file = 'LICENSE'}
 classifiers = [
-    'Development Status :: 2 - Pre-Alpha',
+    'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Topic :: Communications',
@@ -20,24 +20,23 @@ classifiers = [
 readme = {file = 'README.rst', content-type = 'text/x-rst'}
 requires-python = '>=3.10, <3.12'
 dependencies = [
-    # 'argparse',
-    # 'beetools',
     'fastapi',
-    # 'git-it',
     'mysql-connector-python',
-    # 'Pygments',
     'sqlalchemy',
 #    'sqlalchemy-utils',
   ]
 
 [project.optional-dependencies]
 dev = [
+    'build',
     'git-it',
     'httpx',
+    'Pygments',
     #codecov'
     #docutils'
     'pytest',
     'pytest-cov',
+    'rstcheck',
     'uvicorn'
 ]
 
@@ -46,7 +45,12 @@ Changelog = 'https://github.com/hendrikdutoit/FastAPIExample/blob/enhancement/ma
 Homepage = 'https://github.com/hendrikdutoit/FastAPIExample'
 
 [build-system]
-requires = [ 'setuptools', 'wheel',]
+requires = [
+    "build",
+    "setuptools >= 68",
+    "wheel",
+    "setuptools-git >= 1.1",
+]
 build-backend = 'setuptools.build_meta'
 
 [tool.black]
@@ -57,6 +61,7 @@ target-version = ["py311"]
 [tool.codespell]
 count = ""
 quiet-level = 2
+skip = 'documentation/Archive/*'
 
 [tool.coverage.run]
 source = ['src']
@@ -68,3 +73,12 @@ pythonpath = ['src', 'tests' ]
 markers = [
     "select: Run a selection of tests",
 ]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+#python_functions = 'demo_setup'
+testpaths = 'tests'
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false

@@ -9,10 +9,14 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: double-quote-string-fixer
+#      - id: mixed-line-ending
+#        args: [ --fix=crlf ]
       - id: no-commit-to-branch
         args: [ --branch, master ]
       - id: pretty-format-json
       - id: requirements-txt-fixer
+#      - id: trailing-whitespace
+#        args: [ --markdown-linebreak-ext=md ]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.15.0
@@ -26,25 +30,22 @@ repos:
     -   id: reorder-python-imports
         args: [
             '--application-directories=.:src:tests',
-            '--py37-plus',
+            '--py38-plus',
         ]
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.6
     hooks:
       - id: codespell
+        args: [--write, --toml, pyproject.toml]
         additional_dependencies:
           - tomli
-#        exclude: tests/
-#        args:
-#          - --quiet-level=2
 
   - repo: https://github.com/psf/black
     rev: 23.11.0
     hooks:
     - id: black
       language_version: python3
-#      exclude: 'templates'
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
@@ -52,13 +53,3 @@ repos:
     - id: flake8
       language_version: python3
       exclude: 'templates'
-
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
-    hooks:
-      - id: codespell
-        additional_dependencies:
-          - tomli
-#        exclude: tests/
-#        args:
-#          - --quiet-level=2
