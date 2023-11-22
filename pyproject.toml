@@ -1,6 +1,6 @@
 [project]
 name = 'FastAPIExample'
-version = '0.0.6'
+version = '0.0.7'
 authors = [
     { name = 'Hendrik du Toit', email = 'hendrik@brightedge.co.za' },
 ]
@@ -24,7 +24,7 @@ dependencies = [
     # 'beetools',
     'fastapi',
     # 'git-it',
-    # 'mysql-connector-python',
+    'mysql-connector-python',
     # 'Pygments',
     'sqlalchemy',
 #    'sqlalchemy-utils',
