@@ -55,7 +55,7 @@ class TestItems:
                     'loc': ['path', 'item_id'],
                     'msg': 'Input should be a valid integer, unable to parse string as an integer',
                     'input': 'foo',
-                    'url': 'https://errors.pydantic.dev/2.2/v/int_parsing',
+                    'url': 'https://errors.pydantic.dev/2.5/v/int_parsing',
                 }
             ]
         }
@@ -178,7 +178,7 @@ class TestMultipleAndQuery:
                     'loc': ['query', 'item_id'],
                     'msg': 'Field required',
                     'type': 'missing',
-                    'url': 'https://errors.pydantic.dev/2.2/v/missing',
+                    'url': 'https://errors.pydantic.dev/2.5/v/missing',
                 }
             ]
         }
