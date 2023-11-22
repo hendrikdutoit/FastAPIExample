@@ -7,36 +7,38 @@ jobs:
   CI:
     runs-on: ${{matrix.os}}
     env:
-      MYSQL_DB_NAME: FastAPIExample
-      MYSQL_DATABASE: FastAPIExample
-      MYSQL_HOST: localhost
-      MYSQL_PASSWORD: N0tS0S3curePassw0rd
-      MYSQL_PWD: N0tS0S3curePassw0rd
-      MYSQL_ROOT_PWD: N0tS0S3curePassw0rd
-      MYSQL_TCP_PORT_EXAMPLES: 50002
-      MYSQL_TCP_PORT: 50002
-      SQLALCHEMY_SILENCE_UBER_WARNING: 1
+      MYSQL_DATABASE: ${{vars.MYSQL_DATABASE}}
+      MYSQL_ROOT_PASSWORD: ${{vars.MYSQL_ROOT_PASSWORD}}
+      MYSQL_HOST:  ${{vars.MYSQL_HOST}}
+      INSTALLER_USERID: ${{vars.INSTALLER_USERID}}
+      INSTALLER_PWD: ${{vars.INSTALLER_PWD}}
+      MYSQL_PWD: ${{vars.MYSQL_PWD}}
+      MYSQL_TCP_PORT: ${{vars.MYSQL_TCP_PORT}}
     strategy:
       fail-fast: true
       matrix:
+        python-version: ['3.11']
+#        python-version: ['3.10', '3.11']
         os: ['ubuntu-latest']
 #        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-#        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
-        python-version: ['3.10', '3.11']
     services:
       mysql:
-        image: mysql:8.0.21
+        image: mysql:8.0.25
         ports:
-          - 50002:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          - ${{vars.MYSQL_TCP_PORT}}:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-cmd="mysqladmin ping -h localhost -u root -p${{ vars.MYSQL_ROOT_PASSWORD }}" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
         env:
-#          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ${{env.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{env.MYSQL_DB_NAME}}
+          MYSQL_ROOT_PASSWORD: ${{vars.MYSQL_ROOT_PASSWORD}}
+          MYSQL_DATABASE: ${{vars.MYSQL_DATABASE}}
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -45,15 +47,16 @@ jobs:
           architecture: x64
 
       - name: Verify DB exists
-        run: mysql --host 127.0.0.1 -uroot -p${{env.MYSQL_PASSWORD}} -e "SHOW DATABASES" # LIKE 'FastAPIExample'"
+        run: mysql --host ${{env.MYSQL_HOST}} -uroot -p${{env.MYSQL_ROOT_PASSWORD}} -e "SHOW DATABASES"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements/requirements.txt -r requirements/requirements_dev.txt
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PWD:$PWD/src" >> $GITHUB_ENV
 
       - name: Install editable package
-        run: pip install -e .
+        run: pip install -e .[dev]
 
       - name: Run pytest
         run: pytest --cov=./
