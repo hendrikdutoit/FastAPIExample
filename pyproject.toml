@@ -33,6 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     'git-it',
+    'httpx',
     #codecov'
     #docutils'
     'pytest',
