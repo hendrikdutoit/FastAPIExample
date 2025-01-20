@@ -1,6 +1,7 @@
 """
 https://fastapi.tiangolo.com/tutorial/sql-databases/
 """
+
 from pydantic import BaseModel
 
 
