@@ -2,7 +2,6 @@ import os
 import sys
 from pprint import pprint
 
-
 project = 'FastAPIExample'
 copyright = '2023, Hendrik du Toit'
 author = 'Hendrik du Toit'

@@ -5,7 +5,6 @@ from sqlalchemy import engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-
 SQLALCHEMY_DATABASE_URL = engine.URL.create(
     'mysql+mysqlconnector',
     username='root',
